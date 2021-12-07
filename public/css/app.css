@@ -1,0 +1,311 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* Styles Navigation */
+
+nav.guest-navigation{
+    display: flex;
+    justify-content: end;
+    background: #111;
+    background: #7d8392;
+}
+
+nav.guest-navigation a:hover{
+    background: rgb(197, 218, 139);    
+}
+
+nav.guest-navigation a{
+    padding: 1em 1em;
+    display: block;
+    text-decoration: none;
+    color: #fff;
+}
+
+
+/* Styles container */
+.container{
+    min-height: 100vh;
+    width: 100%;
+}
+
+.form-content{
+    width: 100%;
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.title-form{
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    letter-spacing: 2px;   
+}
+
+form.product-form{
+    border: 10px;
+    padding: .5em .5em;
+    border-radius: 10px;
+    /* background: #7d8392; */
+    background: rgb(159, 152, 152);
+}
+
+.product-form .inputBox {
+    padding: 1em 0;
+}
+
+.product-form .inputBox input
+{
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 10px;
+}
+
+form.inline-form .inputBox{
+    display: inline-block;
+    padding: 1em;
+}
+
+.product-form .inputBox label{
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: #fff;
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.submitBtn{
+    padding: 0.5em;
+    text-align: center;
+    display: block;
+}
+
+.product-form #product-submit,
+.product-form #product-clear
+{
+    padding: 10px 10px;
+    background: rgba(87, 221, 68, 0.8);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.product-form #product-submit:hover{
+    background: rgba(87, 221, 68, 0.4);
+}
+
+.product-form #product-clear
+{
+    background: rgba(255, 71, 71, 0.8);
+}
+
+.product-form #product-clear:hover
+{
+    background: rgba(255, 71, 71, 0.4);
+}
+
+
+
+.buttonBox a{
+    text-decoration: none;
+}
+
+
+/* Dashboar styles */
+
+.dashboard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Dashboard navigation styles */
+
+.nav-header{
+    padding: 1em;
+    display: flex;
+    background: rgb(199, 194, 194);
+}
+
+.nav-title-app{
+    margin-right: auto;
+}
+
+.nav-title-app a
+{
+    text-decoration: none;
+    color: #000;
+}
+
+.nav-header li{
+    position: relative;
+    list-style: none;
+    padding: 0 20px;
+}
+
+.nav-header li a{
+    position: relative;
+    display: block;
+    color: #6843cf;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.nav-header li a:hover{
+    background: rgba(114, 98, 98, 0.5);
+}
+
+/* Styles Auth Navigation */
+
+ul.navigation-links
+{
+    display: flex;
+}
+
+
+/* Product List Styles */
+
+.flex-center{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.table-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1em 1em;
+    gap: 20px;
+    border: 1px solid #000;
+    width: 80%;
+    background: #cbcbcb;
+    border-radius: 5px;
+}
+
+.table-title
+{
+    letter-spacing: 2px;
+    color: #000;
+}
+
+.list-header{
+    display: flex;
+    justify-content: start;
+    width: 100%;
+}
+
+.general-actions{
+    margin-left: auto;
+}
+
+.general-actions button{
+    border: none;
+    border-radius: 5px;
+    padding: 5px 5px;
+    background: #04AA6D;
+    cursor: pointer;   
+}
+
+.general-actions button:hover
+{
+    background: #1f6b70;
+}
+
+
+/* Products table */
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td{
+    padding: 10px;
+    text-align: center;
+    background: #eee;
+}
+
+th{
+    background: #04AA6D;
+}
+
+table.products-table{
+    width: 100%;
+}
+
+table td form
+{
+    display: inline-block;
+}
+
+.action-table{
+    display: inline-block;
+    padding: 5px;
+    text-decoration: none;
+    color: #000;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+td .action-delete{
+    background: rgba(255, 71, 71, 0.8);
+}
+
+td .action-update{
+
+    background: rgba(87, 221, 68, 0.8);
+}
+
+/* Styles success message */
+
+.flash-message{
+    opacity: 1;
+    position: fixed;
+    cursor: pointer;
+    padding: 10px 10px;
+    left: calc(100% - 270px);
+    top: calc(100% - 100px);
+    border-radius: 5px;
+    transition: 0.5s ease-in-out;
+}
+
+.flash-message .flash-title h2
+{
+    color: #eee;
+}
+
+.flash-container{
+}
+
+.flash-message .flash-content
+{
+    color: #eee;
+}
+
+.none-message{
+    opacity: 0;
+}
+
+.success{
+    background: rgba(87, 221, 68, 0.8);
+}
+
+.alert{
+    background: rgba(255, 71, 71, 0.8);
+}
+
+
