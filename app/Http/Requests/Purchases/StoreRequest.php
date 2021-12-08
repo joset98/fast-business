@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Purchases;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StoreRequest extends FormRequest
 {
@@ -24,7 +26,26 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'product_id' => 'required|exists:products,id',
         ];
+    }
+
+    public function messages()
+    {
+      return [
+        'product_id.required' => 'El id de producto debe ser referido',
+        'product_id.exists' => 'El producto seleccionado, no existe',
+      ];
+    }
+
+    protected function failedValidation(Validator $validator) {
+
+        throw new HttpResponseException(response()->json(
+            [
+                'message' => 'opps ha habido un error',
+                'errors' => $validator->errors()->all(),
+            ], 
+            422
+        ));
     }
 }

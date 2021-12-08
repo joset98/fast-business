@@ -33,7 +33,10 @@ Route::post('/products', [ProductController::class,'store'])->name('products.sto
 Route::put('/products', [ProductController::class,'update'])->name('products.update');
 Route::delete('/products/{id}', [ProductController::class,'destroy'])->name('products.destroy');
 
+Route::post('/purchases', [PurchaseController::class, 'store'])->name('purchases.store');
 Route::resource('/purchases', PurchaseController::class);
-Route::resource('/invoices', InvoiceController::class);
+
+Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices');
+// Route::resource('/invoices', InvoiceController::class);
 
 require __DIR__.'/auth.php';

@@ -3,14 +3,12 @@
 @section('title', 'Listado de Productos')
 
 @section('content')
-<div class="container flex-center">
+<div class="container pt-2">
+@include('messages.flash_message')
 
-    @include('forms.products.create')
-    @include('messages.flash_message')
+    <div class="content-area">
 
-    <div class="table-content">
-
-        <div class="list-header">
+        <div class="droplist-header">
 
             <div class="table-title">
                 <h2>Lista de Productos</h2>
@@ -18,68 +16,64 @@
 
         </div>
 
-        <table class="products-table">
+        <div class="droplist">
 
-            <thead>
-                <th>
-                    Nombre
-                </th>
+            @forelse($products as $product)
 
-                <th>
-                    Costo
-                </th>
+            <section>
 
-                <th>
-                    Impuesto
-                </th>
+                <div class="product-card">
 
-                <th>
-                    Acciones
-                </th>
+                    <div class="product-image">
+                        <img width="200" src="{{$product->product_picture}}" alt="">
 
-            </thead>
+                        <div class="product-name">
+                            {{$product->name}}
+                        </div>
 
-            <tbody class="products-btable">
+                    </div>
 
-                @forelse ($products as $product)
-                <tr>
-                    <td>
-                        {{$product->name}}
-                    </td>
-                    <td>
-                        {{$product->cost}}
-                    </td>
-                    <td>
-                        {{$product->tax}} %
-                    </td>
+                    <div class="card-footer">
 
-                    <td id="actions-row">
-                        <form id="actions-form" action="{{ url('/products',[$product->id]) }}" method="POST">
-                            @csrf
+                        <div class="product-price">
+                            <div class="product-cost">
+                            Costo
+                                <strong>
+                                {{ $product->cost}}
+                                </strong>  
+                            </div>
 
-                            <button type="submit" class="action-table action-update">
-                                Actualizar
-                            </button>
+                            <div class="product-tax">
+                                Impuesto {{ $product->tax}} %
+                            </div>
+                        </div>
 
-                            <button type="submit" class="action-table action-delete" >
-                                Eliminar
-                            </button>
-                        </form>
+                        <div class="action-card">
+                            <form class="purchase-form" action="{{route('purchases.store')}}" method="POST">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{$product->id}}">
+                                <button type="submit" class="action-table action-purchase">
+                                    Comprar Producto
+                                </button>
+    
+                            </form>
 
-                    </td>
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="3">
-                        No hay Productos Disponibles
-                    </td>
-                </tr>
-                @endforelse
+                        </div>
 
+                    </div>
+                </div>
+            </section>
+            @empty
+            <div class="empty-list-message">
+                <h2>
+                    No hay productos disponibles, Vuelva Pronto!
+                </h2>
+            </div>
 
-            </tbody>
+            @endforelse
 
-        </table>
+        </div>
+
 
     </div>
 

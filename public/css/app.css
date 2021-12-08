@@ -40,6 +40,9 @@ nav.guest-navigation a{
     align-items: center;
 }
 
+.pt-2{
+    padding: 1.5em;
+}
 
 .title-form{
     width: 100%;
@@ -228,7 +231,8 @@ ul.navigation-links
 /* Products table */
 
 table, th, td {
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    border-width: 0 0 1px 0;
     border-collapse: collapse;
 }
 
@@ -236,6 +240,7 @@ th, td{
     padding: 10px;
     text-align: center;
     background: #eee;
+    border-style: solid;
 }
 
 th{
@@ -256,7 +261,7 @@ table td form
     padding: 5px;
     text-decoration: none;
     color: #000;
-    border-radius: 10px;
+    border-radius: 5px;
     border: none;
     cursor: pointer;
 }
@@ -265,12 +270,78 @@ td .action-delete{
     background: rgba(255, 71, 71, 0.8);
 }
 
-td .action-update{
+td .action-update,
+.action-purchase
+{
 
     background: rgba(87, 221, 68, 0.8);
 }
 
-/* Styles success message */
+/* Styles Droplist Products */
+
+.content-area{
+    padding: 1em;
+}
+
+.droplist-header{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.droplist{
+    padding: 1em;
+    height: 100vh;
+    border-style: dashed;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.droplist section{
+    flex-grow: 1;
+    flex-shrink: 0;
+    /* padding: 0.5em 0.5em; */
+}
+
+.empty-list-message {
+    text-align: center;
+}
+
+.product-card{
+    display: flex;
+    flex-wrap: wrap;
+    border: solid;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.product-image{
+    height: 100%;
+    width: 100%;
+}
+
+.card-footer
+{
+    display: flex;
+    justify-content: space-between;
+
+    /* margin-top: auto; */
+    width: 100%;
+}
+
+.product-price{
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+}
+
+.card-footer div{
+    border: 1px dashed #000;
+}
+
+
+/* Styles Response message */
 
 .flash-message{
     opacity: 1;

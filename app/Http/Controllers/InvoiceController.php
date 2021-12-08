@@ -6,13 +6,16 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\Invoices\StoreRequest;
 use App\Models\Invoice;
+use App\Models\User;
 
 class InvoiceController extends Controller
 {
     public function index()
     {
-        $products = Invoice::all();
-        return view('admin.products.index', compact('products'));
+        $invoices = Invoice::all();
+        $bills = User::has('purchases.invoices')->get();
+
+        return view('admin.invoices.index', compact('invoices'));
     }
 
     public function store(StoreRequest $request)

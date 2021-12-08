@@ -15,7 +15,11 @@ class CreatePurchasesTable extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->float('amount', 8, 2);
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('product_id')->constrained('products');
+            $table->decimal('total');
+            $table->enum('status',['ACTIVO' , 'EN PROCESO', 'APROBADO'])->default('ACTIVO');
+            $table->date('purchase_date')->nullable();
             $table->timestamps();
         });
     }

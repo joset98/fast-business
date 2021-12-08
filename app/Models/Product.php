@@ -18,5 +18,13 @@ class Product extends Model
         'name',
         'cost',
         'tax',
+        'stock',
+        'picture_file'
     ];
+
+    public function purchase()
+    {
+        return $this->hasOne(Purchase::class);
+    }
+
 }

@@ -11,7 +11,7 @@
         </li>
 
         <li>
-            <a href="{{route('products')}}">
+            <a href="{{ route('invoices') }}">
                 Facturas
             </a>
         </li>

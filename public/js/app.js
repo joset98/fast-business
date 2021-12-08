@@ -100,6 +100,41 @@ $('document').ready(function () {
 
     });
 
+    $('.purchase-form').submit(function (evt){
+        evt.preventDefault();
+        const purchaseForm = this;
+        const {action: route} = purchaseForm;
+        const data = new FormData(this); 
+        // const dataString = purchaseForm.serializeArray()
+        console.debug({id:data.get('product_id'), route})
+
+        $.ajax(route, {
+            type: 'post',
+            data,
+            processData: false,
+            contentType: false,
+            success: function (result) {
+                const { data } = result;
+                initFlashMessage(data);
+            },
+            error:function (error){
+                const { message, errors } = JSON.parse(error.responseText);
+                console.log(errors)
+                const textError = errors.length > 1 ? 'Error al registrar la compra' : errors[0];
+                initFlashMessage(message, textError)
+            },
+            complete:function(){
+                setTimeout(function () {
+                    $('.flash-message').addClass('none-message')
+                    $('.flash-message').removeClass('success')
+                    $('.flash-message').removeClass('alert')
+                }, 2000)
+            }
+        });
+
+        
+    });
+
 });
 
 function initFlashMessage(message, error = undefined){
@@ -121,3 +156,11 @@ function initFlashMessage(message, error = undefined){
     flashContent.html(document.createTextNode(message));
     
 };
+
+
+function resetIfEmpty(){
+    const children = $('.products-btable').children();
+    if (children.hasClass('empty-table'))
+        children.remove();
+}
+

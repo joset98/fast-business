@@ -46,14 +46,17 @@
         evt.preventDefault();
         const userForm = $('#user-form');
         const route = userForm.attr('action');
-        const dataString = userForm.serialize()
-        console.log(dataString)
+        // const dataString = userForm.serialize()
+        const formProduct = new FormData(evt.target); 
         console.debug(userForm)
 
         $.ajax(route, {
             type: 'POST',
-            data: dataString,
+            data: formProduct,
+            processData: false,
+            contentType: false,
             success: function (result) {
+                resetIfEmpty();
                 const { data:{message, new_product} } = result;
                 const {name, cost, tax, id} = new_product;
                 const productUrl = `{{ url('/products') }}` + `/${id}`;

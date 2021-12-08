@@ -29,6 +29,7 @@ class StoreRequest extends FormRequest
             'name' => 'required',
             'cost' => 'required',
             'tax' => 'required',
+            'stock' => 'required',
         ];
     }
 
@@ -38,6 +39,7 @@ class StoreRequest extends FormRequest
         'name.required' => 'El nombre del Producto es requerido',
         'cost.required' => 'El costo del Producto es requerido',
         'tax.required' => 'El impuesto del producto es requerido',
+        'stock.required' => 'El stock del producto es requerido',
       ];
     }
 

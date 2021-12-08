@@ -69,7 +69,7 @@
                     </td>
                 </tr>
                 @empty
-                <tr>
+                <tr class="empty-table">
                     <td colspan="3">
                         No hay Productos Disponibles
                     </td>
