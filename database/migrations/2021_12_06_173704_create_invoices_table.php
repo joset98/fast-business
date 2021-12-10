@@ -13,9 +13,12 @@ class CreateInvoicesTable extends Migration
      */
     public function up()
     {
+        if(!Schema::hasTable('invoices'))
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('purchase_id')->constrained('purchases');
+            $table->foreignId('user_id')->constrained('users');
+            $table->decimal('total');
+            $table->decimal('total_tax');
             $table->timestamps();
         });
     }

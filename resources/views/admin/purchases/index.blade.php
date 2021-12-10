@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Listado de Facturas')
+@section('title', 'Listado de Compras')
 
 @section('content')
 <div class="container flex-center pt-2">
@@ -10,7 +10,7 @@
         <div class="list-header space-between">
 
             <div class="table-title">
-                <h2>Facturas Emitidas</h2>
+                <h2>Lista de Compras</h2>
             </div>
 
             <div class="table-button">
@@ -22,6 +22,7 @@
 
                 </form>
             </div>
+
 
         </div>
 
@@ -40,47 +41,28 @@
                     Impuesto Total Cobrado
                 </th>
 
-                <th>
-                    Fecha de Facturacion
-                </th>
-
-                <th>
-                    Acciones
-                </th>
 
             </thead>
 
-            <tbody class="">
+            <tbody class="products-btable">
 
-                @forelse ($invoices as $invoice)
+                @forelse ($userPurchases as $userPurchase)
                 <tr>
                     <td>
-                        {{$invoice->user->name}}
+                        {{$userPurchase->name}}
                     </td>
                     <td>
-                        {{$invoice->total}}
+                        {{$userPurchase->purchases_sum_total}}
                     </td>
                     <td>
-                        {{$invoice->total_tax}}
+                        {{$userPurchase->tax_sum_total}}
                     </td>
-                    <td>
-                        {{$invoice->invoice_date}}
-                    </td>
-                    
-                    <td id="actions-row">
 
-                        <a href="{{route('invoices.show', $invoice->id )}}" 
-                            class="action-table action-bill"
-                        >
-                            Desglosar
-                        </a>
-
-                    </td>
                 </tr>
                 @empty
-                <td colspan="3">
-                    No hay Facturas Disponibles
-                </td>
+                    <td colspan="3">
+                        No hay Facturas Disponibles
+                    </td>
                 </tr>
                 @endforelse
 

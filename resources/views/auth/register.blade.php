@@ -2,12 +2,22 @@
 
 @section('content')
 
-<div class="form-content">
+<div class="form-content column-form-content">
 
-    <form class="product-form" method="POST" action="{{ route('register') }}">
+    @if(count($errors) > 0 )
+        <div class="alert dialog-notif register-alert" role="alert">
+            <ul style="list-style: none;">
+                @foreach($errors->all() as $error)
+                <li>{{$error}}.</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form class="px-1 product-form" method="POST" action="{{ route('register') }}">
         @csrf
 
-        <div class="tittle-form">
+        <div class="title-form">
             <h1>Registrar Usuario</h1>
         </div>
 
@@ -33,9 +43,7 @@
                 confirmar contraseña
             </label>
 
-            <input required type="password" id="password_confirmation" 
-                name="password_confirmation"
-            >
+            <input required type="password" id="password_confirmation" name="password_confirmation">
 
         </div>
 

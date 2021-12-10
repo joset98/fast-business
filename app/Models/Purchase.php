@@ -17,7 +17,9 @@ class Purchase extends Model
     protected $fillable = [
         'product_id',
         'user_id',
+        'quantity',
         'total',
+        'invoice_id',
     ];
 
     public function product()
@@ -32,6 +34,6 @@ class Purchase extends Model
 
     public function invoice()
     {
-        return $this->hasOne(Invoice::class);
+        return $this->belongsTo(Invoice::class);
     }
 }

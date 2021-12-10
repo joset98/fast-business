@@ -52,6 +52,11 @@
                             <form class="purchase-form" action="{{route('purchases.store')}}" method="POST">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{$product->id}}">
+
+                                <div class="numberInput">
+                                    <input type="number" required placeholder="cantidad" name="quantity" min="1">
+                                </div>
+
                                 <button type="submit" class="action-table action-purchase">
                                     Comprar Producto
                                 </button>

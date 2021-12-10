@@ -48,22 +48,47 @@ nav.guest-navigation a{
     width: 100%;
     text-align: center;
     color: #fff;
-    letter-spacing: 2px;   
+    letter-spacing: 2px;
+    padding: 1em 1em;   
+}
+
+form.login-form{
+    border: 10px;
+    padding: .5em .5em;
+    border-radius: 10px;
+    background: rgb(159, 152, 152);
+    width: 320px;
+    height: 420px;
+    transform: translate(5%, 20%);
 }
 
 form.product-form{
     border: 10px;
-    padding: .5em .5em;
+    padding: .5em 1.5em;
     border-radius: 10px;
     /* background: #7d8392; */
     background: rgb(159, 152, 152);
 }
 
-.product-form .inputBox {
+.column-form-content
+{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.login-form .login-fields{
+    padding: 1em 1em;
+}
+
+.product-form .inputBox,
+.login-form .inputBox
+{
     padding: 1em 0;
 }
 
-.product-form .inputBox input
+.product-form .inputBox input,
+.login-form .inputBox input
 {
     width: 100%;
     outline: none;
@@ -77,7 +102,9 @@ form.inline-form .inputBox{
     padding: 1em;
 }
 
-.product-form .inputBox label{
+.product-form .inputBox label,
+.login-form  .inputBox label
+{
     font-size: 18px;
     letter-spacing: 1px;
     color: #fff;
@@ -91,8 +118,14 @@ form.inline-form .inputBox{
     display: block;
 }
 
+.fixed-bottom
+{
+    margin-top: auto;
+}
+
 .product-form #product-submit,
-.product-form #product-clear
+.product-form #product-clear,
+.login-form #product-submit
 {
     padding: 10px 10px;
     background: rgba(87, 221, 68, 0.8);
@@ -101,20 +134,23 @@ form.inline-form .inputBox{
     cursor: pointer;
 }
 
-.product-form #product-submit:hover{
+.product-form #product-submit:hover,
+.login-form .submit-login:hover
+{
     background: rgba(87, 221, 68, 0.4);
 }
 
-.product-form #product-clear
+.product-form #product-clear,
+.login-form #product-clear
 {
     background: rgba(255, 71, 71, 0.8);
 }
 
-.product-form #product-clear:hover
+.product-form #product-clear:hover,
+.login-form #product-clear:hover
 {
     background: rgba(255, 71, 71, 0.4);
 }
-
 
 
 .buttonBox a{
@@ -210,6 +246,16 @@ ul.navigation-links
     width: 100%;
 }
 
+.space-between{
+    justify-content: space-between;
+}
+
+.table-resume
+{
+    display: flex;
+    gap: 1em;
+}
+
 .general-actions{
     margin-left: auto;
 }
@@ -277,6 +323,14 @@ td .action-update,
     background: rgba(87, 221, 68, 0.8);
 }
 
+.action-bill{
+    border: 1px solid #1b7940;
+}
+
+.action-bill:hover{
+    background: #3ea85d;
+}
+
 /* Styles Droplist Products */
 
 .content-area{
@@ -291,6 +345,16 @@ td .action-update,
 
 .droplist{
     padding: 1em;
+    max-height: 70vh;
+    border-style: dashed;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    overflow: auto;
+    gap: 3em 1.5em;
+}
+
+.droplist-test{
+    padding: 1em;
     height: 100vh;
     border-style: dashed;
     display: flex;
@@ -300,7 +364,8 @@ td .action-update,
 
 .droplist section{
     flex-grow: 1;
-    flex-shrink: 0;
+    flex-basis: 0;
+    /* flex-shrink: 0; */
     /* padding: 0.5em 0.5em; */
 }
 
@@ -324,9 +389,8 @@ td .action-update,
 .card-footer
 {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-
-    /* margin-top: auto; */
     width: 100%;
 }
 
@@ -337,9 +401,26 @@ td .action-update,
 }
 
 .card-footer div{
-    border: 1px dashed #000;
+    /* border: 1px dashed #000; */
+    padding: 5px;
 }
 
+.purchase-form{
+    display: flex;
+    justify-content: space-around;
+}
+
+.numberInput{
+    width: 7em;
+}
+
+.numberInput input{
+    padding: .33em .75em;
+    border: 0;
+    width: 7em;
+    background: transparent;
+    transition: all .2s linear
+}
 
 /* Styles Response message */
 
@@ -379,4 +460,24 @@ td .action-update,
     background: rgba(255, 71, 71, 0.8);
 }
 
+.dialog-notif{
+    border-radius: 5px ;
+}
 
+.login-alert{
+    text-align: center;
+    width: 100%;
+    padding: 5px 5px;
+    height: 3.5em
+}
+
+.login-alert:hover{
+    cursor: pointer;
+}
+
+.register-alert{
+    text-align: center;
+    width: 25%;
+    padding: 5px 5px;
+    height: 3.5em
+}

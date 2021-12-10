@@ -17,9 +17,9 @@ class CreatePurchasesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('product_id')->constrained('products');
+            $table->integer('quantity');
             $table->decimal('total');
             $table->enum('status',['ACTIVO' , 'EN PROCESO', 'APROBADO'])->default('ACTIVO');
-            $table->date('purchase_date')->nullable();
             $table->timestamps();
         });
     }

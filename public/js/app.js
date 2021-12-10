@@ -105,7 +105,6 @@ $('document').ready(function () {
         const purchaseForm = this;
         const {action: route} = purchaseForm;
         const data = new FormData(this); 
-        // const dataString = purchaseForm.serializeArray()
         console.debug({id:data.get('product_id'), route})
 
         $.ajax(route, {
@@ -117,12 +116,14 @@ $('document').ready(function () {
                 const { data } = result;
                 initFlashMessage(data);
             },
+
             error:function (error){
                 const { message, errors } = JSON.parse(error.responseText);
                 console.log(errors)
-                const textError = errors.length > 1 ? 'Error al registrar la compra' : errors[0];
+                const textError = !!errors && errors.length == 1 ?  errors[0]: 'Error al registrar la compra';
                 initFlashMessage(message, textError)
             },
+
             complete:function(){
                 setTimeout(function () {
                     $('.flash-message').addClass('none-message')
