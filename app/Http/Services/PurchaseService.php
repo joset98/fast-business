@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+use App\Models\Invoice;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -19,7 +20,6 @@ class PurchaseService
 
         return $userPurchases;
     }
-
 
     public function totalTaxWithoutInvoicing()
     {
@@ -46,5 +46,29 @@ class PurchaseService
         $usersWithoutInvoicingWithTotalTax = $this->totalTaxWithoutInvoicing(); 
         return $usersWithoutInvoicingWithTotalTax;
     }
+
+    public function generatePendingInvoices($usersWithPurchases)
+    {
+        try {
+            $usersWithPurchases->map( function ($userItem) {
+                            
+                $newInvoice = Invoice::create([
+                    'user_id' => $userItem->id,
+                    'total' => $userItem->purchases_sum_total,
+                    'total_tax' => $userItem->tax_sum_total,
+                ]);
+    
+                $userItem->purchases->map(function ($purchaseItem) use ($newInvoice){
+                    $purchaseItem->invoice()->associate($newInvoice);
+                    $purchaseItem->save();
+                });
+    
+                }
+            );
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }    
+    } 
 }
 

@@ -34,7 +34,10 @@
                 <th>
                     Impuesto
                 </th>
-
+                
+                <th>
+                    Cantidad comprada
+                </th>
             </thead>
 
             <tbody class="products-btable">
@@ -50,12 +53,15 @@
                     <td>
                         {{$product->tax}} %
                     </td>
+                    <td>
+                        {{$product->quantity}} und
+                    </td>
 
                 </tr>
                 @empty
                 <tr class="empty-table">
                     <td colspan="3">
-                        No hay Productos Disponibles
+                        No hay Facturas Disponibles
                     </td>
                 </tr>
                 @endforelse

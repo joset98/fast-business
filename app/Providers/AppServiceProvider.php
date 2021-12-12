@@ -26,15 +26,5 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-
-        Blade::directive('authadmin', function () {
-            $admin = Auth::user()->role;
-            info(fnmatch('{$admin}', 'ADMIN'));
-            return "<?php if (! fnmatch('{$admin}', 'ADMIN') ) : ?>";
-        });
-
-        Blade::directive('endauthadmin', function ($expression) {
-            return '<?php endif; ?>';
-        });
     }
 }

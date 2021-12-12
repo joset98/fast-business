@@ -5,12 +5,6 @@
 <!-- Page Heading -->
 <div class="container">
 
-@authadmin
-    <div>gola</div>
-@endauthadmin
-
-   <div>contenido</div>
-    
 </div>
 
 @endsection

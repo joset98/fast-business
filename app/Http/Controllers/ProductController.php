@@ -20,34 +20,35 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::all();
-        return view('admin.products.index', compact('products'));
+        return view('admin.products.index');
     }
 
     public function productList()
     {
-        $products = Product::all();
-        $products->each(function ($item){
-			// $item->product_picture = asset( $item->picture_file);
-            // $fileName = Str::of($item->picture_file)->afterLast('/');
-			// $item->product_picture = Storage::get( $fileName);
-			// $item->product_picture = File::get( $item->picture_file);
-        });
-
+        $products = Product::simplePaginate(12);
+        
         return view('products.index', compact('products'));
+    }
+
+    public function productsTable()
+    {
+
+        $products = Product::all();
+
+        return response()->json([
+            'data' => $products
+        ],200);
     }
 
     public function store(StoreRequest $request)
     {
         abort_if(!$request->ajax(), 500, 'Error al tratar de hacer la operacion');
-        $path = $this->fileService->storeRequestFile($request);
 
         $newProduct = Product::create([
             'name' => $request->name,
             'cost' => $request->cost,
             'tax' => $request->tax,
             'stock' => $request->stock,
-            'picture_file' => $path,
         ]);
       
         abort_if(!$newProduct, 500, 'Error al registrar el producto');
@@ -62,19 +63,25 @@ class ProductController extends Controller
 
     public function update(StoreRequest $request)
     {
-        abort_if(!$request->ajax(), 500, 'Error al tratar de hacer la operacion');
-        
-        $newProduct = Product::create([
-            'name' => $request->name,
-            'cost' => $request->cost,
-            'tax' => $request->description,
-        ]);
+        try {
+            $updatedProduct = Product::where('id', $request->id)
+                            ->update([
+                                'name' => $request->name,
+                                'cost' => $request->cost,
+                                'tax' => $request->tax,
+                                'stock' => $request->stock
+                            ]);
+            if (!$updatedProduct)
+                return redirect()->route('products')->withErrors([
+                    'errors' => 'Hubo un error, al querer editar el producto.'
+                ]);
 
-        abort_if(!$newProduct, 500, 'Error al registrar el producto');
-
-        return response()->json([
-            'data' => 'Producto registrado correctamente'
-        ],200);
+            return redirect()->route('products.index')->with('statusUpdate','Producto actualizado!');
+        } catch (\Throwable $th) {
+            return redirect()->route('products')->withErrors([
+                'errors' => 'Hubo un error, al querer editar el producto.'
+            ]);
+        }
     }
 
     public function destroy($id)
@@ -85,7 +92,20 @@ class ProductController extends Controller
                 'data' => 'Producto eliminado correctamente'
             ],200);
         } catch (\Throwable $th) {
+            dd($th);
             abort( 500, 'Error en la accion');
+        }
+
+    }
+
+    public function edit($id)
+    {
+        try {
+            $product = Product::find($id);
+            return view('admin.products.edit', compact('product'));
+
+        } catch (\Throwable $th) {
+            return redirect()->back()->withErrors(['errors' => 'Hubo un error, al querer editar el objeto.']);
         }
 
     }

@@ -21,7 +21,8 @@ class CheckRole
         if( Auth::user()->role === $role ) {
             return $next($request);
         }
-
-        return response()->json(['error' => 'Acceso no autorizado'], 401);
+        if(Auth::user()->role == 'ADMIN')
+            return redirect()->route('products.index')->withErrors(['errors' => 'Acceso no autorizado']);
+        return redirect()->route('list.products')->withErrors(['errors' => 'Acceso no autorizado']);
     }
 }

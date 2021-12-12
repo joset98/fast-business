@@ -11,7 +11,7 @@
         <div class="droplist-header">
 
             <div class="table-title">
-                <h2>Lista de Productos</h2>
+                <h1>Lista de Productos</h1>
             </div>
 
         </div>
@@ -24,11 +24,13 @@
 
                 <div class="product-card">
 
-                    <div class="product-image">
-                        <img width="200" src="{{$product->product_picture}}" alt="">
+                    <div class="product-header">
 
                         <div class="product-name">
-                            {{$product->name}}
+                            <h2>
+                                {{$product->name}}
+
+                            </h2>
                         </div>
 
                     </div>
@@ -39,12 +41,13 @@
                             <div class="product-cost">
                             Costo
                                 <strong>
-                                {{ $product->cost}}
+                                    {{ $product->cost}}
                                 </strong>  
                             </div>
 
                             <div class="product-tax">
-                                Impuesto {{ $product->tax}} %
+                                Impuesto 
+                                <strong>{{ $product->tax}} %</strong>
                             </div>
                         </div>
 
@@ -78,7 +81,9 @@
             @endforelse
 
         </div>
-
+        <div class="product-pagination">
+            {{$products->links()}}
+        </div>
 
     </div>
 

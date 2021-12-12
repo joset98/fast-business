@@ -34,8 +34,9 @@ class AuthenticatedSessionController extends Controller
             $request->authenticate();
     
             $request->session()->regenerate();
-    
-            return redirect()->intended(RouteServiceProvider::HOME);
+            if(Auth::user()->role == 'ADMIN')
+                return redirect()->route('products.index');
+            return redirect()->intended(RouteServiceProvider::HOME . '/list');
         }
         catch(\Throwable $ex){
             return redirect()->back()->withErrors(['errors' => 'los datos suministrados son invalidos']);
@@ -56,6 +57,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
     }
 }

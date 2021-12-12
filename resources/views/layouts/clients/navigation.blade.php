@@ -1,15 +1,9 @@
 <h2 class="nav-title-app">
-    <a href="{{route('dashboard')}}">Fast Business</a>
+    <a>Fast Business</a>
 </h2>
 
 <nav>
     <ul class="navigation-links">
-        <li>
-            <a href="{{route('products')}}">
-                Compras
-            </a>
-        </li>
-
         <li>
             <a href="{{route('list.products')}}">
                 Productos

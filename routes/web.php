@@ -18,30 +18,69 @@ use App\Http\Controllers\PurchaseController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-// Route::resource('/products', ProductController::class);
+Route::middleware(['auth'])->group(function () {
 
-Route::get('/products', [ProductController::class,'index'])->name('products')->middleware('auth');
-Route::get('/products/list', [ProductController::class,'productList'])->name('list.products')->middleware('auth');
-Route::post('/products', [ProductController::class,'store'])->name('products.store');
-Route::put('/products', [ProductController::class,'update'])->name('products.update');
-Route::delete('/products/{id}', [ProductController::class,'destroy'])->name('products.destroy');
 
-Route::post('/purchases', [PurchaseController::class, 'store'])->name('purchases.store');
-Route::get('/purchases', [PurchaseController::class, 'index'])->name('purchases');
-Route::resource('/purchases', PurchaseController::class);
+    // rutas de productos
+    Route::prefix('admin/')->group(function () {
 
-Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices');
-Route::get('/invoices/{invoicesId}', [InvoiceController::class, 'show'])->name('invoices.show');
+        // Route::resource('/products', ProductController::class)->except([
+        //     'create', 'show'
+        // ]);
 
-Route::get('/invoices/generate', [InvoiceController::class, 'generateInvoices'])->name('invoices.generate');
-Route::get('/invoices/{userId}', [InvoiceController::class, 'show'])->name('invoices.show');
-// Route::resource('/invoices', InvoiceController::class);
+        Route::get('/products/table', [ProductController::class, 'productsTable'])
+            ->name('products.table');
 
-require __DIR__.'/auth.php';
+        Route::get('/products', [ProductController::class, 'index'])->name('products.index')
+            ->middleware('role:ADMIN');
+
+        Route::post('/products', [ProductController::class, 'store'])
+            ->name('products.store');
+
+        Route::delete('/products/{id}', [ProductController::class, 'destroy'])
+            ->name('products.destroy');
+
+        Route::get('/products/{id}/edit', [ProductController::class, 'edit'])
+            ->name('products.edit');
+
+        Route::put('/products/{id}', [ProductController::class, 'update'])
+            ->name('products.update');
+
+        // rutas de facturas
+        Route::get('/invoices', [InvoiceController::class, 'index'])
+            ->name('invoices');
+
+        Route::get('/invoices/table', [InvoiceController::class, 'invoiceTable'])
+            ->name('invoices.table');
+
+        Route::post('/invoices/generate', [InvoiceController::class, 'generateInvoices'])
+            ->name('invoices.generate');
+
+        Route::get('/invoices/{invoicesId}', [InvoiceController::class, 'show'])
+            ->name('invoices.show');
+    });
+
+    // rutas para el cliente
+    Route::middleware('role:CLIENT')->group(function () {
+
+        // productos
+        Route::get('/products/list', [ProductController::class, 'productList'])
+            ->name('list.products');
+
+        // rutas de compras
+        Route::get('/purchases', [PurchaseController::class, 'index'])
+            ->name('purchases');
+
+        Route::post('/purchases', [PurchaseController::class, 'store'])
+            ->name('purchases.store');
+    });
+});
+
+require __DIR__ . '/auth.php';

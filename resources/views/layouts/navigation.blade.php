@@ -1,11 +1,11 @@
 <h2 class="nav-title-app">
-    <a href="{{route('dashboard')}}">Fast Business</a>
+    <a>Fast Business</a>
 </h2>
 
 <nav>
     <ul class="navigation-links">
         <li>
-            <a href="{{route('products')}}">
+            <a href="{{route('products.index')}}">
                 Productos
             </a>
         </li>
@@ -20,7 +20,7 @@
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
 
-                <a href="#" onclick="event.preventDefault();
+                <a href="" onclick="event.preventDefault();
                                             this.closest('form').submit();">
                     Logout
                 </a>

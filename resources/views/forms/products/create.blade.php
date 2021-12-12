@@ -7,8 +7,6 @@
             <h2>Rellene los Datos del Articulo</h2>
         </div>
 
-        <input type="hidden" name="id">
-
         <div class="inputBox">
             <label for="name">Nombre</label>
             <input required type="text" id="name" name="name">
@@ -35,16 +33,9 @@
 
         </div>
 
-        <div class="inputBox">
-
-            <label for="photo">Foto del producto</label>
-            <input required name="photo" type="file" id="photo" placeholder="photo"></input>
-
-        </div>
-
         <div class="submitBtn">
             <button type="submit" id="product-submit">Guardar</button>
-            <button type="button" id="product-clear">Limpiar</button>
+            <button type="button" id="product-clear" onclick="this.closest('form').reset()">Limpiar</button>
         </div>
 
     </form>

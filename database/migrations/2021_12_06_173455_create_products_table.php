@@ -19,7 +19,6 @@ class CreateProductsTable extends Migration
             $table->float('cost', 8, 2);
             $table->float('tax', 8, 2);
             $table->integer('stock');
-            $table->string('picture_file');
             $table->timestamps();
         });
     }

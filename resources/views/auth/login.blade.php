@@ -36,8 +36,8 @@
         @endif
 
 
-        <div class="inputBox submitBtn fixed-bottom">
-            <button type="submit" class="submit-login" id="product-submit">Guardar</button>
+        <div class="alignBtn fixed-bottom">
+            <button type="submit" class="submit-login" id="product-submit">Ingresar</button>
         </div>
 
     </form>

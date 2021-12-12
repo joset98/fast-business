@@ -11,8 +11,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
     <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- Scripts -->
 </head>
 
@@ -21,8 +22,7 @@
         <header class="nav-header">
             @auth
             @if( auth()->user()->role == 'ADMIN')
-
-            @include('layouts.navigation')
+                @include('layouts.navigation')
             @endif
             
             @if( auth()->user()->role == 'CLIENT')
@@ -38,84 +38,12 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
-<script>
+    @yield('scripts')
     
-    $('#user-form').submit(function (evt) {
-
-        evt.preventDefault();
-        const userForm = $('#user-form');
-        const route = userForm.attr('action');
-        // const dataString = userForm.serialize()
-        const formProduct = new FormData(evt.target); 
-        console.debug(userForm)
-
-        $.ajax(route, {
-            type: 'POST',
-            data: formProduct,
-            processData: false,
-            contentType: false,
-            success: function (result) {
-                resetIfEmpty();
-                const { data:{message, new_product} } = result;
-                const {name, cost, tax, id} = new_product;
-                const productUrl = `{{ url('/products') }}` + `/${id}`;
-                console.log(productUrl)
-                initFlashMessage(message)
-                $('.products-btable').append(
-                    `
-                    <tr>
-                        <td>
-                            ${name}
-                        </td>
-
-                        <td>
-                            ${cost}
-                        </td>
-
-                        <td>
-                            ${tax} %
-                        </td>
-
-                        <td id="actions-row">
-                        <form id="actions-form" action="${productUrl}" method="POST">
-                            @csrf
-                            <button type="submit" class="action-table action-update">
-                                Actualizar
-                            </button>
-
-                            <button type="submit" class="action-table action-delete" >
-                                Eliminar
-                            </button>
-                        </form>
-
-                    </td>
-
-                    </tr>
-                    `
-                );
-
-                console.log(message)
-                console.log(new_product)
-            },
-
-            error: function (error) {
-                const { message, errors } = JSON.parse(error.responseText);
-                console.log(errors)
-                const textError = errors.length > 1 ? 'Error al registrar el producto' : errors[0];
-                initFlashMessage(message, textError)
-            },
-            complete:function(){
-                setTimeout(function () {
-                    $('.flash-message').addClass('none-message')
-                    $('.flash-message').removeClass('success')
-                    $('.flash-message').removeClass('alert')
-                }, 2000)
-            }
-        });
-    })
-
-</script>
 </body>
 
 </html>
