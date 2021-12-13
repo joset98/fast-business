@@ -29,29 +29,14 @@ Route::middleware(['auth'])->group(function () {
 
 
     // rutas de productos
-    Route::prefix('admin/')->group(function () {
+    Route::prefix('admin/')->middleware('role:ADMIN')->group(function () {
 
-        // Route::resource('/products', ProductController::class)->except([
-        //     'create', 'show'
-        // ]);
+        Route::resource('/products', ProductController::class)->except([
+            'create', 'show'
+        ]);
 
         Route::get('/products/table', [ProductController::class, 'productsTable'])
             ->name('products.table');
-
-        Route::get('/products', [ProductController::class, 'index'])->name('products.index')
-            ->middleware('role:ADMIN');
-
-        Route::post('/products', [ProductController::class, 'store'])
-            ->name('products.store');
-
-        Route::delete('/products/{id}', [ProductController::class, 'destroy'])
-            ->name('products.destroy');
-
-        Route::get('/products/{id}/edit', [ProductController::class, 'edit'])
-            ->name('products.edit');
-
-        Route::put('/products/{id}', [ProductController::class, 'update'])
-            ->name('products.update');
 
         // rutas de facturas
         Route::get('/invoices', [InvoiceController::class, 'index'])

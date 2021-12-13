@@ -12,7 +12,7 @@
         <div class="list-header space-between">
 
             <div class="table-title">
-                <h2>Facturas Emitidas</h2>
+                <h1>Facturas Emitidas</h1>
             </div>
 
             <div class="pending-invoices">

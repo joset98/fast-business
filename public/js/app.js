@@ -75,7 +75,8 @@ $('document').ready(function () {
         const { action: route } = purchaseForm;
         const data = new FormData(this);
         console.debug({ id: data.get('product_id'), route })
-
+        evt.target.reset()
+        
         $.ajax(route, {
             type: 'post',
             data,
@@ -105,7 +106,58 @@ $('document').ready(function () {
 
     });
 
-    
+
+    $('#user-form').submit(function (evt) {
+
+        evt.preventDefault();
+        const userForm = $('#user-form');
+        const route = userForm.attr('action');
+        // const dataString = userForm.serialize()
+        const formProduct = new FormData(evt.target);
+
+        $.ajax(route, {
+            type: 'POST',
+            data: formProduct,
+            processData: false,
+            contentType: false,
+            success: function (result) {
+                resetIfEmpty();
+                const {
+                    data: {
+                        message,
+                        new_product
+                    }
+                } = result;
+                const {
+                    name,
+                    cost,
+                    tax,
+                    id
+                } = new_product;
+                initFlashMessage(message)
+                $('#products-table').DataTable().ajax.reload();
+                evt.target.reset()
+            },
+
+            error: function (error) {
+                const {
+                    message,
+                    errors
+                } = JSON.parse(error.responseText);
+                console.log(errors)
+                const textError = errors.length > 1 ? 'Error al registrar el producto' : errors[0];
+                initFlashMessage(message, textError)
+            },
+            complete: function () {
+                setTimeout(function () {
+                    $('.flash-message').addClass('none-message')
+                    $('.flash-message').removeClass('success')
+                    $('.flash-message').removeClass('alert')
+                }, 2000)
+            }
+        });
+    })
+
 
     // inicializar tabla de productos
     const invoicesTable = $('#invoices-table').DataTable({
@@ -149,8 +201,8 @@ $('document').ready(function () {
     });
 
     // evento para facturar clientes pendiente
-    $('#invoice-form').submit(function(evt){
-        evt.preventDefault();    
+    $('#invoice-form').submit(function (evt) {
+        evt.preventDefault();
         const purchaseForm = this;
         const data = new FormData(purchaseForm);
         const { action: route } = purchaseForm;
@@ -161,7 +213,7 @@ $('document').ready(function () {
             processData: false,
             contentType: false,
             success: function (result) {
-                const { data: {message} } = result;
+                const { data: { message } } = result;
                 initFlashMessage(message);
                 invoicesTable.ajax.reload();
             },

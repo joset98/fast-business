@@ -25,6 +25,10 @@
 
             <thead>
                 <th>
+                    Código
+                </th>
+
+                <th>
                     Nombre
                 </th>
 
@@ -67,7 +71,11 @@
                 [10, 25, 50, "All"]
             ],
             ajax: "products/table",
-            columns: [{
+            columns: [
+                {
+                    data: "id"
+                },
+                {
                     data: "name"
                 },
                 {
@@ -104,58 +112,6 @@
             ]
         });
 
-
-        $('#user-form').submit(function(evt) {
-
-            evt.preventDefault();
-            const userForm = $('#user-form');
-            const route = userForm.attr('action');
-            // const dataString = userForm.serialize()
-            const formProduct = new FormData(evt.target);
-
-            $.ajax(route, {
-                type: 'POST',
-                data: formProduct,
-                processData: false,
-                contentType: false,
-                success: function(result) {
-                    resetIfEmpty();
-                    const {
-                        data: {
-                            message,
-                            new_product
-                        }
-                    } = result;
-                    const {
-                        name,
-                        cost,
-                        tax,
-                        id
-                    } = new_product;
-                    const productUrl = `{{ url('/products') }}` + `/${id}`;
-                    initFlashMessage(message)
-                    productsTable.ajax.reload();
-                    evt.target.reset()
-                },
-
-                error: function(error) {
-                    const {
-                        message,
-                        errors
-                    } = JSON.parse(error.responseText);
-                    console.log(errors)
-                    const textError = errors.length > 1 ? 'Error al registrar el producto' : errors[0];
-                    initFlashMessage(message, textError)
-                },
-                complete: function() {
-                    setTimeout(function() {
-                        $('.flash-message').addClass('none-message')
-                        $('.flash-message').removeClass('success')
-                        $('.flash-message').removeClass('alert')
-                    }, 2000)
-                }
-            });
-        })
 
     })
 </script>

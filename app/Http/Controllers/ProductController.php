@@ -7,16 +7,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Models\Product;
 use App\Http\Requests\Products\StoreRequest;
-use App\Http\Services\ProductFileService;
 
 class ProductController extends Controller
 {
-    private $fileService;
-
-    public function __construct (ProductFileService $service)
-    {
-        $this->fileService = $service;
-    }
 
     public function index()
     {
@@ -87,10 +80,12 @@ class ProductController extends Controller
     public function destroy($id)
     {
         try {
+
             $deleteProduct = Product::find($id)->delete();
             return response()->json([
                 'data' => 'Producto eliminado correctamente'
             ],200);
+
         } catch (\Throwable $th) {
             dd($th);
             abort( 500, 'Error en la accion');
@@ -101,6 +96,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         try {
+            
             $product = Product::find($id);
             return view('admin.products.edit', compact('product'));
 

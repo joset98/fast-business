@@ -253,6 +253,7 @@ ul.navigation-links
 .table-resume
 {
     display: flex;
+    flex-direction: column;
     gap: 1em;
 }
 
@@ -346,11 +347,12 @@ td .action-update,
 .droplist{
     padding: 1em;
     max-height: 70vh;
-    border-style: dashed;
+    border: 1px solid;
     display: grid;
     grid-template-columns: repeat(4, auto);
     overflow: auto;
     gap: 3em 1.5em;
+    background: rgb(159, 152, 152);
 }
 
 .droplist-test{
@@ -379,6 +381,7 @@ td .action-update,
     border: solid;
     border-radius: 10px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    background: #fff;
 }
 
 .product-header{
@@ -429,6 +432,11 @@ td .action-update,
     width: 7em;
     background: transparent;
     transition: all .2s linear
+}
+
+.numberInput input:focus{
+    /* border-bottom: 1px solid; */
+    border: none;
 }
 
 .product-pagination{
