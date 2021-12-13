@@ -44,7 +44,7 @@ $('document').ready(function () {
         setTimeout(function () {
             $('.flash-message').addClass('none-message')
             $('.flash-message').removeClass('success')
-            $('.flash-message').removeClass('alert')
+            $('.flash-message').removeClass('alertBg')
         }, 2000)
 
     }
@@ -98,7 +98,7 @@ $('document').ready(function () {
                 setTimeout(function () {
                     $('.flash-message').addClass('none-message')
                     $('.flash-message').removeClass('success')
-                    $('.flash-message').removeClass('alert')
+                    $('.flash-message').removeClass('alertBg')
                 }, 2000)
             }
         });
@@ -152,7 +152,7 @@ $('document').ready(function () {
                 setTimeout(function () {
                     $('.flash-message').addClass('none-message')
                     $('.flash-message').removeClass('success')
-                    $('.flash-message').removeClass('alert')
+                    $('.flash-message').removeClass('alertBg')
                 }, 2000)
             }
         });
@@ -221,16 +221,16 @@ $('document').ready(function () {
             error: function (error) {
                 const { message, errors } = JSON.parse(error.responseText);
                 console.log(errors)
-                const textError = !!errors && errors.length == 1 ? errors[0] : 'Error al emitir la facturas';
-                initFlashMessage(message, textError)
+                const textError = !!errors && errors.length == 1 ? errors[0] : 'Error al emitir facturas';
+                initFlashMessage(textError, message)
             },
 
             complete: function () {
-                setTimeout(function () {
-                    $('.flash-message').addClass('none-message')
-                    $('.flash-message').removeClass('success')
-                    $('.flash-message').removeClass('alert')
-                }, 2000)
+                // setTimeout(function () {
+                //     $('.flash-message').addClass('none-message')
+                //     $('.flash-message').removeClass('success')
+                //     $('.flash-message').removeClass('alertBg')
+                // }, 2000)
             }
         });
     });
@@ -240,12 +240,12 @@ $('document').ready(function () {
 function initFlashMessage(message, error = undefined) {
 
     const flashMessage = $('.flash-message');
-    const flashTitle = $('.flash-title h2');
+    const flashTitle = $('.flash-title div');
     const flashContent = $('.flash-content');
     flashMessage.toggleClass('none-message');
     console.log(error)
     if (error) {
-        flashMessage.toggleClass('alert');
+        flashMessage.toggleClass('alertBg');
         flashTitle.html(document.createTextNode(message));
         flashContent.html(document.createTextNode(error));
         return;

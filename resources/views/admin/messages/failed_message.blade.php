@@ -1,6 +1,6 @@
 @if (count($errors) > 0)
 
-<div class="flash-message alert">
+<div class="flash-message alertBg">
     <div class="flash-container">
 
         <div class="flash-title">

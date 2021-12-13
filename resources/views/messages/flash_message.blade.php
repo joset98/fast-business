@@ -2,7 +2,7 @@
     <div class="flash-container">
 
         <div class="flash-title">
-            <h2></h2>
+            <div></div>
         </div>
 
         <div class="flash-content">

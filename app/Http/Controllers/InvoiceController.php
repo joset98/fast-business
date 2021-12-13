@@ -50,6 +50,8 @@ class InvoiceController extends Controller
         abort_if(!$request->ajax(), 500, 'Error al tratar de hacer la operacion');
 
         $usersWithoutInvoices = $this->purchaseService->usersInvoicing();
+        abort_if($usersWithoutInvoices->isEmpty(), 500, 'No hay facturas pendientes');
+
         $isInvoiced = $this->purchaseService->generatePendingInvoices($usersWithoutInvoices);
         abort_if(!$isInvoiced, 500, 'Error al tratar de hacer la operacion');
 

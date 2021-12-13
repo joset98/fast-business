@@ -82,12 +82,12 @@ class ProductController extends Controller
         try {
 
             $deleteProduct = Product::find($id)->delete();
+
             return response()->json([
                 'data' => 'Producto eliminado correctamente'
             ],200);
 
         } catch (\Throwable $th) {
-            dd($th);
             abort( 500, 'Error en la accion');
         }
 
@@ -98,6 +98,9 @@ class ProductController extends Controller
         try {
             
             $product = Product::find($id);
+            if(!$product)
+                return redirect()->back()->withErrors(['errors' => 'Hubo un error, al querer editar el objeto.']);
+
             return view('admin.products.edit', compact('product'));
 
         } catch (\Throwable $th) {

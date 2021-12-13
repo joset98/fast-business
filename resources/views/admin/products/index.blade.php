@@ -10,7 +10,6 @@
     @include('admin.messages.success_message')
     @include('admin.messages.failed_message')
     
-
     <div class="table-content">
 
         <div class="list-header">

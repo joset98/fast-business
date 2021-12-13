@@ -14,20 +14,20 @@
 
         <div class="inputBox">
             <label for="cost">Costo</label>
-            <input required type="number" id="cost" name="cost">
+            <input required type="number" min="1" id="cost" name="cost">
         </div>
 
         <div class="inputBox">
 
             <label for="tax">Impuesto</label>
-            <input required name="tax" type="number" max="100" id="tax" placeholder="Impuesto"></input>
+            <input required name="tax" type="number" min="1" max="100" id="tax" placeholder="Impuesto"></input>
 
         </div>
 
         <div class="inputBox">
 
             <label for="stock">Stock</label>
-            <input required name="stock" type="number" id="stock" 
+            <input required name="stock" type="number" min="1" id="stock" 
                 placeholder="Cantidad Dispoinble">
             </input>
 

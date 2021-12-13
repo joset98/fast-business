@@ -57,7 +57,9 @@
                                 <input type="hidden" name="product_id" value="{{$product->id}}">
 
                                 <div class="numberInput">
-                                    <input type="number" required placeholder="cantidad" name="quantity" min="1">
+                                    <input type="number" required placeholder="cantidad" 
+                                        name="quantity" min="1"
+                                    >
                                 </div>
 
                                 <button type="submit" class="action-table action-purchase">
